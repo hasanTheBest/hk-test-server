@@ -24,7 +24,7 @@ app.get("/", async (req, res) => {
 })
 
 // ADD A USER WITH SECTOR
-router.post("/add", async (req, res) => {
+app.post("/add", async (req, res) => {
   const { database } = await connectToDatabase();
   const collection = database.collection("addUserCollection");
   const result = await collection.insertOne(req.body);
