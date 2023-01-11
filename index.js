@@ -22,32 +22,37 @@ const client = new MongoClient(uri, {
   serverApi: ServerApiVersion.v1,
 });
 
-async function run() {
-  try {
-    await client.connect();
-    console.log("db is connected");
+// async function run() {
+//   try {
+//     await client.connect();
+//     console.log("db is connected");
 
-    // Sectors
-    // Collections
-    const sectorCollection = client
-      .db("hk-test-101")
-      .collection("sectorCollection");
+//     // Sectors
+//     // Collections
+//     const sectorCollection = client
+//       .db("hk-test-101")
+//       .collection("sectorCollection");
 
 
-      // // base url
-app.get("/", async (req, res) => {
-  const sectors = await sectorCollection.find().toArray();
+//       // // base url
+// app.get("/", async (req, res) => {
+//   const sectors = await sectorCollection.find().toArray();
 
-  res.send(sectors)
-});
+//   res.send(sectors)
+// });
 
     
-  } finally {
-    // await client.close();
-  }
-}
+//   } finally {
+//     // await client.close();
+//   }
+// }
 
-run().catch(console.dir);
+// base url 
+app.get("/", (req, res) => {
+  res.send("Server is working.")
+})
+
+// run().catch(console.dir);
 
 
 
