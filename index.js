@@ -41,7 +41,7 @@ app.get("/view", async (req, res) => {
   const query = {};
   const options = {
     sort: {
-      _id: 1
+      _id: -1
     }
   };
 
