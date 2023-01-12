@@ -27,8 +27,28 @@ app.get("/", async (req, res) => {
 app.post("/add", async (req, res) => {
   const { database } = await connectToDatabase();
   const collection = database.collection("addUserCollection");
+
   const result = await collection.insertOne(req.body);
 
+  res.send(result);
+});
+
+// VIEW USERS AND SECTORS INVOLVED TO
+app.get("/view", async (req, res) => {
+  const { database } = await connectToDatabase();
+  const addUserCollection = database.collection("addUserCollection");
+
+  const query = {};
+  const options = {
+    sort: {
+      _id: 1
+    }
+  };
+
+  const cursor = addUserCollection.find(query, options);
+  const result = await cursor.toArray();
+
+  // send the data
   res.send(result);
 });
 
