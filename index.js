@@ -52,6 +52,23 @@ app.get("/view", async (req, res) => {
   res.send(result);
 });
 
+// GET A USER AND SECTORS
+app.get("/view/:id", async (req, res) => {
+  const { database } = await connectToDatabase();
+  const addUserCollection = database.collection("addUserCollection");
+
+  const { id } = req.params;
+
+  const query = {
+    _id: ObjectId(id),
+  };
+
+  const response = await addUserCollection.findOne(query);
+
+  // send data
+  res.send(response);
+});
+
 // listen to the port
 app.listen(port, () => {
   console.log("hk test  listening to the port", port);
