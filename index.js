@@ -71,11 +71,13 @@ app.get("/view/:id", async (req, res) => {
 });
 
 // EDIT USER AND SECTORS
-app.put("edit/:id", async (req, res) => {
+app.put("/edit/:id", async (req, res) => {
   const { database } = await connectToDatabase();
   const addUserCollection = database.collection("addUserCollection");
 
   const { id } = req.params;
+
+console.log(id)
 
   const filter = {
      _id: ObjectId(id),
