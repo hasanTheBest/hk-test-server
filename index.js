@@ -15,7 +15,7 @@ app.use(express.json());
 
 // GET SECTORS
 app.get("/", async (req, res) => {
-  
+
   const { database } = await connectToDatabase();
   const collection = database.collection(process.env.HKTEST_ATLAS_COLLECTION);
 
@@ -68,6 +68,31 @@ app.get("/view/:id", async (req, res) => {
 
   // send data
   res.send(response);
+});
+
+// EDIT USER AND SECTORS
+app.put("edit/:id", async (req, res) => {
+  const { database } = await connectToDatabase();
+  const addUserCollection = database.collection("addUserCollection");
+
+  const { id } = req.params;
+
+  const filter = {
+     _id: ObjectId(id),
+  };
+
+  const options = {
+    upsert: true,
+  };
+
+  const updateDoc = {
+    $set: req.body,
+  };
+
+  const result = await addUserCollection.updateOne(filter, updateDoc, options);
+
+  
+  res.send(result);
 });
 
 // listen to the port
